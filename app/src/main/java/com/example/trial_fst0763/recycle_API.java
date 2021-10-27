@@ -82,7 +82,6 @@ public class recycle_API extends Fragment {
                 progressBar.dismiss();
                 if (response.isSuccessful() && response != null) {
                     Toast.makeText(getActivity(), "api retrieval successful", Toast.LENGTH_SHORT).show();
-
                     dataModel = response.body();
                     SortedData = dataModel.getTstratemaster();
                     SetAdatper(SortedData);

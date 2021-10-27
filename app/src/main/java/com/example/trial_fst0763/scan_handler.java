@@ -32,7 +32,8 @@ public class scan_handler extends AppCompatActivity implements ZXingScannerView.
 
             @Override
             public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-
+                scan_handler.stopCamera();
+                finish();
             }
 
             @Override

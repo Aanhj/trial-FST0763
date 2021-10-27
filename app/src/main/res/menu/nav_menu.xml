@@ -24,6 +24,11 @@
         android:icon="@drawable/code_scanner"
         android:title="Barcode Scanner" />
 
+    <item
+        android:id="@+id/otp_menu"
+        android:enabled="true"
+        android:icon="@drawable/otp_icon"
+        android:title="OTP Generator" />
 
     <item
         android:id="@+id/signout"

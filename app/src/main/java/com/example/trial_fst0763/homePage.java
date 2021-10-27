@@ -118,6 +118,10 @@ public class homePage extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout, new barcode_scanner()).commit();
                         drawer.closeDrawers();
                         break;
+                    case R.id.otp_menu:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout,new OtpReaderGenerator()).commit();
+                        drawer.closeDrawers();
+                        break;
 
                     case R.id.signout:
 
