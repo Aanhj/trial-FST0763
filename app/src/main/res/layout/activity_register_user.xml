@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:hint="Enter UserName"
-
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@_."
                 app:boxStrokeColor="@color/dark_slate_blue"
                 app:errorEnabled="true"
 
