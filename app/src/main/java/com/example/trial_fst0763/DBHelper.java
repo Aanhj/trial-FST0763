@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean checkUser(String username,String mobile){
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.rawQuery("SELECT * FROM fst1_user WHERE USERNAME=? AND mobile=?",new String[]{username,mobile});
+        Cursor cursor=db.rawQuery("SELECT USERNAME,MOBILE FROM fst1_user WHERE USERNAME=? AND mobile=?",new String[]{username,mobile});
         if(cursor.getCount()>1)
             return true;
         else return false;
@@ -40,7 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean checkUname(String username){
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.rawQuery("SELECT * FROM fst1_user WHERE USERNAME=?",new String[]{username});
+        Cursor cursor=db.rawQuery("SELECT USERNAME FROM fst1_user WHERE USERNAME=?",new String[]{username});
         if(cursor.getCount()>1)
             return true;
         else return false;
@@ -51,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean checkUphone(String mobile){
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.rawQuery("SELECT * FROM fst1_user WHERE mobile=?",new String[]{mobile});
+        Cursor cursor=db.rawQuery("SELECT MOBILE FROM fst1_user WHERE mobile=?",new String[]{mobile});
         if(cursor.getCount()>1)
             return true;
         else return false;
@@ -89,7 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean checkuser(String mobile,String password){
         SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.rawQuery("SELECT  *  FROM fst1_user WHERE MOBILE=? AND PASSWORD=?",new String[]{mobile,password});
+        Cursor cursor=db.rawQuery("SELECT  MOBILE,PASSWORD  FROM fst1_user WHERE MOBILE=? AND PASSWORD=?",new String[]{mobile,password});
         if(cursor.getCount()>0)
             return true;
         else
