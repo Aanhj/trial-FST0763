@@ -88,7 +88,7 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
                     @Override
                     public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
                         Toast.makeText(v.getContext(), "Please Grant Permission", Toast.LENGTH_SHORT).show();
-                        return;
+                        mapFragment=null;
                     }
 
                     @Override
@@ -97,13 +97,6 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
                     }
                 }).check();
 
-
-
-
-
-        
-
-        
         return v;
 
     }
@@ -138,10 +131,6 @@ public class RouteMap extends Fragment implements OnMapReadyCallback {
                 // Setting the position of the marker
                 options.position(point);
 
-                /**
-                 * For the start location, the color of marker is GREEN and
-                 * for the end location, the color of marker is RED.
-                 */
                 if(mMarkerPoints.size()==1){
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 }else if(mMarkerPoints.size()==2){

@@ -3,16 +3,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.trial_fst0763.OtpReaderGenerator"
     android:background="#1d3557">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="OTP Generator"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="30dp"/>
+        android:layout_margin="10dp"
+
+        >
+
+    <!-- TODO: Update blank fragment layout -->
+        //generates notifation for otp
+
+        <Button
+            android:id="@+id/generate_otp"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="133dp"
+
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="#007506"
+            android:gravity="center"
+            android:text="OTP Generator"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_below="@+id/generate_otp"
+            android:id="@+id/TIL_otp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/dark_slate_blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="Enter Password"
+            app:errorEnabled="true"
+            android:padding="2dp"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtBoxOtpReader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789"
+                android:enabled="true"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TIL_otp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="144dp"
+            android:id="@+id/verify_otp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="#007506"
+            android:gravity="center"
+            android:text="Verify OTP"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
 
 </FrameLayout>
