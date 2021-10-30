@@ -61,13 +61,13 @@ public class registerUser extends AppCompatActivity {
     String strmail, strpass, struname, strfname, strlname, strphone, timestamp, imageFilename, photoPath;
     CircleImageView profilepic;
     Uri SelectedImage;
-    Intent intent;
+//    Intent intent;
     TextView registerr;
     byte[] img;
-    File file;
+    /*File file;
     Bitmap bitmap;
     ProgressDialog progressDialog;
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -216,7 +216,7 @@ public class registerUser extends AppCompatActivity {
         });
         builder.show();
     }
-
+/*
     private File createImageFile() {
         timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         imageFilename = "test_" + timestamp;
@@ -232,7 +232,7 @@ public class registerUser extends AppCompatActivity {
         photoPath = "content://" + file.getAbsolutePath();
         return file;
 
-    }
+    }*/
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -259,14 +259,12 @@ public class registerUser extends AppCompatActivity {
                 if (requestCode == SELECT_PICTURE) {
                     try {
                         if (resultCode== Activity.RESULT_OK) {
-                            progressDialog = new ProgressDialog(registerUser.this);
-                            progressDialog.show();
-                            progressDialog.setTitle("please wait");
+                           SelectedImage=data.getData();
                             Bitmap bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), SelectedImage);
                             convertToByte ctb = new convertToByte();
                             img = ctb.getBytes(bmp);
                             profilepic.setImageURI(SelectedImage);
-                            progressDialog.dismiss();
+
                         }
 
                     } catch (IOException e) {

@@ -9,6 +9,8 @@
     <string name="title_activity_route_map">Map</string>
     <string name="google_maps_api">AIzaSyCzvcEQpFdzlIQp79rRzDdBqpK-WIiwEho</string>
     <string name="channel_name">FST_Notification</string>
+    <string name="PHONE_API_KEY">NjM2ZjcyNzY2MzdhNzc2Njc0NTg2YjZlNDM2MTQyNjc=</string>
+
 
 
 </resources>
