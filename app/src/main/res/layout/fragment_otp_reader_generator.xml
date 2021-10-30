@@ -1,52 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.trial_fst0763.OtpReaderGenerator"
-    android:background="#1d3557">
+    android:background="@color/blue_jeans"
+    tools:context="com.example.trial_fst0763.OtpReaderGenerator">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center"
 
         >
 
-    <!-- TODO: Update blank fragment layout -->
-        //generates notifation for otp
 
-        <Button
-            android:id="@+id/generate_otp"
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="133dp"
-
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="#007506"
-            android:gravity="center"
-            android:text="OTP Generator"
-            android:textColor="@color/white" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_below="@+id/generate_otp"
             android:id="@+id/TIL_otp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="@color/dark_slate_blue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/generate_otp"
             android:layout_marginTop="4dp"
+            android:textAlignment="center"
             android:hint="Enter Password"
-            app:errorEnabled="true"
             android:padding="2dp"
+            app:boxStrokeColor="#ffffff"
+            app:errorEnabled="true"
 
             >
 
@@ -61,22 +44,41 @@
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+
+        >
+        <Button
+            android:id="@+id/generate_otp"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#008C07"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="OTP Generator"
+            android:textColor="@color/white" />
+
 
         <Button
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/TIL_otp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="27dp"
-            android:layout_marginEnd="144dp"
             android:id="@+id/verify_otp"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="#007506"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#008C07"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="Verify OTP"
             android:textColor="@color/white" />
+    </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>

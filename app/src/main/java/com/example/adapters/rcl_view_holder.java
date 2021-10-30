@@ -1,9 +1,7 @@
-package com.example.trial_fst0763;
+package com.example.adapters;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fst_t0763.R;
+import com.example.trial_fst0763.DataModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 

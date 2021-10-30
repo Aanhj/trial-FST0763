@@ -8,8 +8,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,16 +35,18 @@ import static android.app.Activity.RESULT_OK;
 public class OtpReaderGenerator extends Fragment {
     private static final int NotificationID = 100;
     private static final int REQ_USER_CONSENT = 200;
+    private static final String ChannleName = "FST_NOTIFICATION";
+
     SmsBroadCastReceiver smsBroadCastReceiver;
 
-    private static final String ChannleName = "FST_Notification_channel";
+
 
     TextInputEditText otpTextBox;
     Button generate_otp, verify_otp;
-    String generatedOtp, checkString, newgeneratedOTP, timestamp, test, phone;
+    String  newgeneratedOTP,generatedOtp,message,lastOTP;
     Random random = new Random();
-    /* SmsBroadCastReceiver smsBroadcastReceiver;*/
-
+    public static int OTP_COUNTER=0;
+    public static int OTP_LIMIT=11;
 
     @Override
 
@@ -58,13 +63,33 @@ public class OtpReaderGenerator extends Fragment {
         otpTextBox = v.findViewById(R.id.txtBoxOtpReader);
         generate_otp = v.findViewById(R.id.generate_otp);
         verify_otp = v.findViewById(R.id.verify_otp);
-        smartUserConsent();
+      /*  smartUserConsent();*/
+
+
+        generate_otp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (OTP_COUNTER<OTP_LIMIT){
+                GenerateOtp();
+                smartUserConsent();
+                OTP_COUNTER++;
+                }else {
+                    Toast.makeText(getActivity(), "You have reached the limit", Toast.LENGTH_SHORT).show();
+                }
+
+                if (OTP_COUNTER>=10){
+
+                    generate_otp.setClickable(false);
+                    generate_otp.setAlpha(0.5f);
+                }
+            }
+        });
 
 
         verify_otp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            verifyOtp();
             }
         });
 
@@ -74,14 +99,27 @@ public class OtpReaderGenerator extends Fragment {
 
     }
 
+    /*private void createNotification() {
 
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), ChannleName)
+                .setSmallIcon(R.drawable.otp_icon)
+                .setContentTitle("My notification")
+                .setContentText("Some Text")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Your OTP is: " + newgeneratedOTP))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
+        notificationManager.notify(NotificationID, builder.build());
+
+    }
+*/
 
     public void verifyOtp() {
-        test = otpTextBox.getText().toString();
-        if (test.isEmpty() && newgeneratedOTP == null) {
-            Toast.makeText(getContext(), "No OTP was generated", Toast.LENGTH_SHORT).show();
-        } else if (newgeneratedOTP.equals(test)) {
+        String checker=otpTextBox.getText().toString();
+        if (newgeneratedOTP == null) {
+            Toast.makeText(getContext(), "No OTP Received", Toast.LENGTH_SHORT).show();
+        } else if (checker.equals(newgeneratedOTP)) {
             Toast.makeText(getContext(), "OTP matched", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "Wrong OTP", Toast.LENGTH_SHORT).show();
@@ -101,7 +139,7 @@ public class OtpReaderGenerator extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
          if (requestCode==REQ_USER_CONSENT){
             if ((resultCode==RESULT_OK) && (data !=null)){
-                String message=data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
+                message=data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
                 getOTP(message);
             }
          }
@@ -109,21 +147,30 @@ public class OtpReaderGenerator extends Fragment {
     }
 
     private void getOTP(String message) {
+
         Pattern patternOfOtp= Pattern.compile("(|^)\\d{6}");
         Matcher matcher = patternOfOtp.matcher(message);
         if (matcher.find()){
             otpTextBox.setText(matcher.group(0));
+            newgeneratedOTP=matcher.group(0);
         }
     }
 
-   /* private void GenerateOtp() {
+    private void GenerateOtp() {
         generatedOtp = String.valueOf(random.nextInt(1000000));
 
-        if (generatedOtp.length() < 6) {
+        if (generatedOtp.length() == 6) {
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage("8451079482", null, "your OTP is  "+generatedOtp, null, null);
+
+        }else {
             generatedOtp = String.valueOf(random.nextInt(1000000));
         }
+
     }
-*/
+
+
     private void registerBroadcast(){
         smsBroadCastReceiver = new SmsBroadCastReceiver();
         smsBroadCastReceiver.smsBroadcastinterface= new SmsBroadCastReceiver.SmsBroadcastinterface() {

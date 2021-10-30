@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
    tools:showIn="navigation_view"
     >
-
+<group android:enabled="true"
+    android:visible="true"
+    android:checkableBehavior="single">
     <item
         android:id="@+id/map"
         android:enabled="true"
@@ -31,11 +33,23 @@
         android:title="OTP Generator" />
 
     <item
+        android:id="@+id/book_menu"
+        android:enabled="true"
+        android:icon="@drawable/book_movie"
+        android:title="Book Movie" />
+
+</group>
+
+
+<group android:visible="true"
+    android:enabled="true"
+    android:checkableBehavior="single">
+    <item
         android:id="@+id/signout"
         android:enabled="true"
         android:icon="@drawable/signout"
         android:title="Sign Out" />
-
+</group>
 
 
 

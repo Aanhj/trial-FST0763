@@ -7,16 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.renderscript.ScriptIntrinsicColorMatrix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adapters.rcl_view_holder;
 import com.example.fst_t0763.R;
 
-import java.text.CollationKey;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
