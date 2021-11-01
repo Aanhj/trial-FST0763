@@ -123,6 +123,12 @@ public class homePage extends AppCompatActivity {
                         drawer.closeDrawers();
                         break;
 
+                    case R.id.book_menu:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout,new BookMovie()).commit();
+                        drawer.closeDrawers();
+                        break;
+
+
                     case R.id.signout:
 
                         SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
