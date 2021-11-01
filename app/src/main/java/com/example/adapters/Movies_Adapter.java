@@ -10,9 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fst_t0763.R;
+import com.example.trial_fst0763.MovieDetail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +43,14 @@ public class Movies_Adapter extends RecyclerView.Adapter<Movies_Adapter.viewHold
     public void onBindViewHolder(@NonNull Movies_Adapter.viewHolder holder, int position) {
         holder.Movies_text.setText(MovieTitles.get(position));
         holder.Movies_image.setImageResource(MoviesIcons.get(position));
+        Fragment fragment=new MovieDetail();
 
         holder.Movies_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "you clicked "+MovieTitles.get(position), Toast.LENGTH_SHORT).show();
-
+                fragment.getChildFragmentManager().beginTransaction().replace(R.id.movie_frame_layout,new MovieDetail()).addToBackStack(null)
+                        .commit();
 
             }
         });
