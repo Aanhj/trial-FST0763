@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (remember.isChecked()) {
 
+
                         if (checkuser) {
                             SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
                             SharedPreferences.Editor ed = sharedPreferences.edit();

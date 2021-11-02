@@ -29,7 +29,7 @@ import static androidx.recyclerview.widget.LinearLayoutManager.*;
 public class BookMovie extends Fragment {
 
     RecyclerView recyclerView;
-    ArrayList<String> MovieTitles = new ArrayList<String>(Arrays.asList("Phir Hera Pheri", "Golmaal", "The Dictator", "Ace Ventura", "Inception"));
+    public ArrayList<String> MovieTitles = new ArrayList<String>(Arrays.asList("Phir Hera Pheri", "Golmaal", "The Dictator", "Ace Ventura", "Inception"));
 
     List<Integer> MoviesIcons= Arrays.asList(R.drawable.m1,
             R.drawable.m2,
