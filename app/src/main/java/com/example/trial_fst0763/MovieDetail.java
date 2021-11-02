@@ -127,7 +127,7 @@ public class MovieDetail extends Fragment {
                 bookTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        slide=
+                     
                         NumberOfTicket numberOfTicket=new NumberOfTicket();
                         AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
                         appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame,numberOfTicket).commit();
