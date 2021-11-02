@@ -1,19 +1,27 @@
 package com.example.trial_fst0763;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.fst_t0763.R;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.slider.Slider;
 
 
 public class MovieDetail extends Fragment {
@@ -22,7 +30,7 @@ public class MovieDetail extends Fragment {
     ImageView Movieimage;
     TextView MovieTitle,MovieDescription;
     Button BookTicket;
-
+    Float slide;
     public MovieDetail(Integer positionID) {
         this.positionID = positionID;
     }
@@ -55,19 +63,91 @@ public class MovieDetail extends Fragment {
         AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
 
         BookTicket.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                frameLayout.removeAllViews();
-                NumberOfTicket numberOfTicket=new NumberOfTicket();
+              /*  frameLayout.removeAllViews();
+                NumberOfTicket numberOfTicket=new NumberOfTicket();*/
 
-                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame,numberOfTicket).addToBackStack(null)
-                        .commit();
+                BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(getActivity());
+                bottomSheetDialog.setContentView(R.layout.popup_ticketbook);
+                AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
+                appCompatActivity.overridePendingTransition(android.R.style.Widget_DeviceDefault_Light_PopupWindow,android.R.id.accessibilityActionScrollDown);
+
+                Slider sliderRef=bottomSheetDialog.findViewById(R.id.ticket_slider);
+                ImageView imageView=bottomSheetDialog.findViewById(R.id.ticket_image);
+                Button bookTicket=bottomSheetDialog.findViewById(R.id.book_tickets);
+
+                TextView nooftickets=bottomSheetDialog.findViewById(R.id.nooftickets);
+
+                sliderRef.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+                    @Override
+                    public void onStartTrackingTouch(@NonNull Slider slider) {
+
+
+
+
+
+
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(@NonNull Slider slider) {
+                        switch (Math.round(slider.getValue())){
+
+                            case 1:
+                                imageView.setImageResource(R.drawable.cycle);
+
+
+                                break;
+                            case 2:
+                                imageView.setImageResource(R.drawable.bike);
+                                break;
+
+                            case 3:
+                                imageView.setImageResource(R.drawable.rickshaw);
+                                break;
+                            case 4:
+                                imageView.setImageResource(R.drawable.car);
+                                break;
+                            case 5:
+                                imageView.setImageResource(R.drawable.truck);
+                                break;
+
+
+
+                        }
+                        nooftickets.setText("No of Tickets are "+String.valueOf(Math.round(slider.getValue())));
+
+                    }
+                });
+
+
+                bookTicket.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        slide=
+                        NumberOfTicket numberOfTicket=new NumberOfTicket();
+                        AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
+                        appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame,numberOfTicket).commit();
+
+                    }
+                });
+
+
+                bottomSheetDialog.show();
+
+
+
+
 
             }
         });
 
         return v;
     }
+
 
 
 
