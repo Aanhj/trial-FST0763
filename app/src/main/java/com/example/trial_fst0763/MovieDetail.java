@@ -8,15 +8,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +28,7 @@ public class MovieDetail extends Fragment {
     ImageView Movieimage;
     TextView MovieTitle,MovieDescription;
     Button BookTicket;
-    int slide=1;
+    Integer slide=1;
     String ticketNumbers;
 
     public MovieDetail(Integer positionID) {
@@ -118,14 +115,15 @@ public class MovieDetail extends Fragment {
                     @Override
                     public void onClick(View view) {
                     ticketNumbers=nooftickets.getText().toString();
-                    int getter=slide;
-                    if (ticketNumbers !=null) {
-                        NumberOfTicket numberOfTicket = new NumberOfTicket();
-                        AppCompatActivity appCompatActivity = (AppCompatActivity) v.getContext();
-                        appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame, numberOfTicket).commit();
-                        Toast.makeText(getContext(), String.valueOf(getter)  , Toast.LENGTH_SHORT).show();
+                    Integer totalTickets=slide;
 
-                    }
+                        SeatBooking seatBooking = new SeatBooking(totalTickets);
+                        frameLayout.removeAllViews();
+                        AppCompatActivity appCompatActivity = (AppCompatActivity) v.getContext();
+                        appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame, seatBooking).commit();
+                        Toast.makeText(getContext(), String.valueOf(totalTickets)  , Toast.LENGTH_SHORT).show();
+
+
                   /*  else   {
                         Toast.makeText(getContext(), "Please select at least one ticket", Toast.LENGTH_SHORT).show();
 

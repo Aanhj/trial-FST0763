@@ -57,7 +57,7 @@ public class Movies_Adapter extends RecyclerView.Adapter<Movies_Adapter.viewHold
                 Integer positionID= holder.getAdapterPosition();
                 MovieDetail movieDetail=new MovieDetail(positionID);
                 AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
-            appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_frame_layout,movieDetail).commit();
+                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_frame_layout,movieDetail).commit();
 
             }
         });
