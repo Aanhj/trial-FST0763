@@ -59,7 +59,7 @@
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:backgroundTint="@color/blue_jeans"
-        android:text="Book Ticket"
+        android:text="Book Seat"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         />

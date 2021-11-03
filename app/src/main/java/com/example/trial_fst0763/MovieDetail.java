@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fst_t0763.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -30,7 +31,9 @@ public class MovieDetail extends Fragment {
     ImageView Movieimage;
     TextView MovieTitle,MovieDescription;
     Button BookTicket;
-    Float slide;
+    int slide=1;
+    String ticketNumbers;
+
     public MovieDetail(Integer positionID) {
         this.positionID = positionID;
     }
@@ -83,13 +86,6 @@ public class MovieDetail extends Fragment {
                 sliderRef.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
                     @Override
                     public void onStartTrackingTouch(@NonNull Slider slider) {
-
-
-
-
-
-
-
                     }
 
                     @Override
@@ -98,13 +94,10 @@ public class MovieDetail extends Fragment {
 
                             case 1:
                                 imageView.setImageResource(R.drawable.cycle);
-
-
                                 break;
                             case 2:
                                 imageView.setImageResource(R.drawable.bike);
                                 break;
-
                             case 3:
                                 imageView.setImageResource(R.drawable.rickshaw);
                                 break;
@@ -114,12 +107,9 @@ public class MovieDetail extends Fragment {
                             case 5:
                                 imageView.setImageResource(R.drawable.truck);
                                 break;
-
-
-
                         }
                         nooftickets.setText("No of Tickets are "+String.valueOf(Math.round(slider.getValue())));
-
+                            slide=Math.round(slider.getValue());
                     }
                 });
 
@@ -127,11 +117,19 @@ public class MovieDetail extends Fragment {
                 bookTicket.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                    ticketNumbers=nooftickets.getText().toString();
+                    int getter=slide;
+                    if (ticketNumbers !=null) {
+                        NumberOfTicket numberOfTicket = new NumberOfTicket();
+                        AppCompatActivity appCompatActivity = (AppCompatActivity) v.getContext();
+                        appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame, numberOfTicket).commit();
+                        Toast.makeText(getContext(), String.valueOf(getter)  , Toast.LENGTH_SHORT).show();
 
-                        NumberOfTicket numberOfTicket=new NumberOfTicket();
-                        AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
-                        appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame,numberOfTicket).commit();
+                    }
+                  /*  else   {
+                        Toast.makeText(getContext(), "Please select at least one ticket", Toast.LENGTH_SHORT).show();
 
+                    }*/
                     }
                 });
 
