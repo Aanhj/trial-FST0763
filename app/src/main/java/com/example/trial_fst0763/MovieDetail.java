@@ -122,7 +122,7 @@ public class MovieDetail extends Fragment {
                         AppCompatActivity appCompatActivity = (AppCompatActivity) v.getContext();
                         appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_detail_frame, seatBooking).commit();
                         Toast.makeText(getContext(), String.valueOf(totalTickets)  , Toast.LENGTH_SHORT).show();
-
+                        bottomSheetDialog.dismiss();
 
                   /*  else   {
                         Toast.makeText(getContext(), "Please select at least one ticket", Toast.LENGTH_SHORT).show();

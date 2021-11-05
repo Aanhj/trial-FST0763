@@ -133,8 +133,8 @@ public class recycle_API extends Fragment {
                 } else {
                     FLAG_CHECKER = true;
                     testTypeSortingDescending();
-                    Toast.makeText(getActivity(), "Test Type: Descending", Toast.LENGTH_SHORT).show();
                     SetAdatper(SortedData);
+                    Toast.makeText(getActivity(), "Test Type: Descending", Toast.LENGTH_SHORT).show();
                 }
             }
 

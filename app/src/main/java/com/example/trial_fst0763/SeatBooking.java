@@ -1,5 +1,6 @@
 package com.example.trial_fst0763;
 
+import android.content.ClipData;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,16 +22,18 @@ import com.example.fst_t0763.R;
 import java.util.ArrayList;
 
 public class SeatBooking extends Fragment {
-    int TotalSeats, checker = 0 ;
+    int TotalSeats//
+            , checker = 1;
 
     public SeatBooking(Integer totalSeats) {
         this.TotalSeats = totalSeats;
     }
+
     GridView seatGrid;
     Button pay;
     boolean SELECTOR = true;
     //String[] selected_seat=new String[TotalSeats];
-    ArrayList<Integer> selected_seat=new ArrayList<Integer>();
+    ArrayList<Integer> selected_seat = new ArrayList<Integer>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class SeatBooking extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         //seatGrid.setLayoutManager(linearLayoutManager);
         seatGrid.setAdapter(new SeatBooking_Adapter());
+/*
 
         seatGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,16 +62,7 @@ public class SeatBooking extends Fragment {
                 checker++;
                 if(checker >=TotalSeats){
                     selected_seat.add(position);
-                    for (int i=0;i<=selected_seat.size();i++)
-                    {
-                        for (int j=0;j<=selected_seat.size();j++){
-                            if (selected_seat.get(i)==selected_seat.get(j))
-                            {
-                                Toast.makeText(getContext(), "Cannot select seat 2 times", Toast.LENGTH_SHORT).show();
-                            }
 
-                        }
-                    }
                     seatGrid.setEnabled(false);
                     Toast.makeText(getContext()," Successful",Toast.LENGTH_SHORT).show();
                 }
@@ -77,16 +72,40 @@ public class SeatBooking extends Fragment {
 
                 }
 
+                seatSelected();
+
+
+
+
             }
         });
 
+*/
+
+        seatGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ImageView img = view.findViewById(R.id.one_seat);
+                 //3  3
+                if (checker > TotalSeats) {
+
+                    seatGrid.setEnabled(false);
+                    Toast.makeText(getContext(), " Successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    checker++;
+                    selected_seat.add(position);
+                    img.setImageResource(R.drawable.after_booking);
+                    Toast.makeText(getContext(), " Select more ", Toast.LENGTH_SHORT).show();
+                }
+
+            }
 
 
-
-
+        });
 
 
         return v;
     }
+
 
 }
