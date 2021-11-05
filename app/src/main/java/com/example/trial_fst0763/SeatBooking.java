@@ -3,6 +3,7 @@ package com.example.trial_fst0763;
 import android.content.ClipData;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,6 +34,8 @@ public class SeatBooking extends Fragment {
     GridView seatGrid;
     Button pay;
     boolean SELECTOR = true;
+    FrameLayout seatBooking_frame;
+
     //String[] selected_seat=new String[TotalSeats];
     ArrayList<Integer> selected_seat = new ArrayList<Integer>();
 
@@ -50,6 +54,20 @@ public class SeatBooking extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         //seatGrid.setLayoutManager(linearLayoutManager);
         seatGrid.setAdapter(new SeatBooking_Adapter());
+        seatBooking_frame=v.findViewById(R.id.seatBooking_frame);
+
+        pay=v.findViewById(R.id.pay);
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Payment pay=new Payment();
+                AppCompatActivity appCompatActivity= (AppCompatActivity) getActivity();
+                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.seatBooking_frame,pay).commit();
+
+            }
+        });
+
+
 /*
 
         seatGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
