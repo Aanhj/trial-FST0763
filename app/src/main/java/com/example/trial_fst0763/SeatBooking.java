@@ -1,12 +1,10 @@
 package com.example.trial_fst0763;
 
-import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +32,7 @@ public class SeatBooking extends Fragment {
     GridView seatGrid;
     Button pay;
     boolean SELECTOR = true;
-    FrameLayout seatBooking_frame;
+    FrameLayout seat_frame;
 
     //String[] selected_seat=new String[TotalSeats];
     ArrayList<Integer> selected_seat = new ArrayList<Integer>();
@@ -51,18 +49,21 @@ public class SeatBooking extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_seat_booking, container, false);
         seatGrid = v.findViewById(R.id.seatGrid);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        //seatGrid.setLayoutManager(linearLayoutManager);
+       /* LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        seatGrid.setLayoutManager(linearLayoutManager);*/
         seatGrid.setAdapter(new SeatBooking_Adapter());
-        seatBooking_frame=v.findViewById(R.id.seatBooking_frame);
+        seat_frame =v.findViewById(R.id.seatBooking_frame);
 
         pay=v.findViewById(R.id.pay);
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Payment pay=new Payment();
-                AppCompatActivity appCompatActivity= (AppCompatActivity) getActivity();
-                appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.seatBooking_frame,pay).commit();
+                seat_frame.removeAllViews();
+                /*Integer tickets=TotalSeats;*/
+
+               //AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
+                Intent intent=new Intent(getContext(),Payments.class);
+                startActivity(intent);
 
             }
         });

@@ -376,8 +376,3 @@ public class registerUser extends AppCompatActivity {
 
 
 }
-
-
-
-
-

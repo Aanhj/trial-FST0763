@@ -35,6 +35,7 @@
 
 
         <Button
+            android:layout_marginTop="25dp"
             android:id="@+id/pay"
             style="@style/Widget.MaterialComponents.FloatingActionButton"
             android:layout_width="150dp"
