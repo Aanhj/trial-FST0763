@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -30,13 +31,14 @@ public class BookMovie extends Fragment {
 
     RecyclerView recyclerView;
     public ArrayList<String> MovieTitles = new ArrayList<String>(Arrays.asList("Phir Hera Pheri", "Golmaal", "The Dictator", "Ace Ventura", "Inception"));
-
+    Button changeLayout;
     List<Integer> MoviesIcons= Arrays.asList(R.drawable.m1,
             R.drawable.m2,
             R.drawable.m3,
             R.drawable.m4,
             R.drawable.m5
     );
+    Boolean switcher=true;
 
 
     @Override
@@ -53,20 +55,44 @@ public class BookMovie extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_book_movie, container, false);
         recyclerView=v.findViewById(R.id.movie_recyclerView);
-
-
+        changeLayout=v.findViewById(R.id.changeLayout);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-
-
-        /*GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
-        recyclerView.setLayoutManager(gridLayoutManager);
-*/
-
+        recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new Movies_Adapter(v.getContext(),MovieTitles,MoviesIcons));
+        changeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (switcher){
+                    switcher=false;
+                    recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
+                    LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+                    linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+
+                }
+                else {
+                    switcher=true;
+                    recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
+                    GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+
+                }
+
+
+            }
+        });
+
+
+
+       setAdapter();
 
         return v;
+
+    }
+
+    public void setAdapter(){
+        recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
 
     }
 }

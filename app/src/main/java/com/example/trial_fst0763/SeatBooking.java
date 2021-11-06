@@ -20,6 +20,7 @@ import com.example.adapters.SeatBooking_Adapter;
 import com.example.fst_t0763.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SeatBooking extends Fragment {
     int TotalSeats//
@@ -35,7 +36,9 @@ public class SeatBooking extends Fragment {
     FrameLayout seat_frame;
 
     //String[] selected_seat=new String[TotalSeats];
-    ArrayList<Integer> selected_seat = new ArrayList<Integer>();
+//    Integer selected_seat [];
+    ArrayList<Integer> selected_seat = new ArrayList<>();
+    ArrayList<Integer> validator = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,17 +55,17 @@ public class SeatBooking extends Fragment {
        /* LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         seatGrid.setLayoutManager(linearLayoutManager);*/
         seatGrid.setAdapter(new SeatBooking_Adapter());
-        seat_frame =v.findViewById(R.id.seatBooking_frame);
+        seat_frame = v.findViewById(R.id.seatBooking_frame);
 
-        pay=v.findViewById(R.id.pay);
+        pay = v.findViewById(R.id.pay);
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 seat_frame.removeAllViews();
                 /*Integer tickets=TotalSeats;*/
 
-               //AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
-                Intent intent=new Intent(getContext(),Payments.class);
+                //AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
+                Intent intent = new Intent(getContext(), Payments.class);
                 startActivity(intent);
 
             }
@@ -101,23 +104,60 @@ public class SeatBooking extends Fragment {
 
 */
 
+        /*
+         * 8:20 now seats are adding for perfect no of times. like 3 needed only 3 will be added
+         * */
+
+
         seatGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ImageView img = view.findViewById(R.id.one_seat);
-                 //3  3
-                if (checker > TotalSeats) {
+                //3  3
 
-                    seatGrid.setEnabled(false);
-                    Toast.makeText(getContext(), " Successful", Toast.LENGTH_SHORT).show();
+
+                if (selected_seat.contains(position)) {
+                    checker--;
+                    img.setImageResource(R.drawable.before_booking);
+                    selected_seat.remove(selected_seat.indexOf(position));
+                } else if (checker == TotalSeats) {
+                    selected_seat.add(position);
+                    img.setImageResource(R.drawable.after_booking);
+                    Toast.makeText(getContext(), "last seat", Toast.LENGTH_SHORT).show();
+
+                } else if (checker > TotalSeats) {
+                    Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
                 } else {
                     checker++;
                     selected_seat.add(position);
                     img.setImageResource(R.drawable.after_booking);
                     Toast.makeText(getContext(), " Select more ", Toast.LENGTH_SHORT).show();
+
+
                 }
 
-            }
+
+            } /*else {
+
+
+             *//* selected_seat.add(position);
+                    img.setImageResource(R.drawable.after_booking);*//*
+             *//*seatGrid.setEnabled(false);*//*
+                    Toast.makeText(getContext(), " Successful", Toast.LENGTH_SHORT).show();
+
+*/
+
+
+
+               /* while (checker<TotalSeats){
+                    img.setImageResource(R.drawable.after_booking);
+                    checker++;
+                    Toast.makeText(getContext(), "checker is "+String.valueOf(checker), Toast.LENGTH_SHORT).show();
+                }
+                seatGrid.setEnabled(false);
+                Toast.makeText(getContext(), "seat selection done", Toast.LENGTH_SHORT).show();*/
+            /*}*/
+            /*}*/
 
 
         });
@@ -128,3 +168,5 @@ public class SeatBooking extends Fragment {
 
 
 }
+
+
