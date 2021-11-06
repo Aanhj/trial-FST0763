@@ -120,12 +120,15 @@ public class SeatBooking extends Fragment {
                     checker--;
                     img.setImageResource(R.drawable.before_booking);
                     selected_seat.remove(selected_seat.indexOf(position));
-                } else if (checker == TotalSeats) {
+                }
+
+                /*else if (checker == TotalSeats) {
                     selected_seat.add(position);
                     img.setImageResource(R.drawable.after_booking);
                     Toast.makeText(getContext(), "last seat", Toast.LENGTH_SHORT).show();
 
-                } else if (checker > TotalSeats) {
+                }*/
+                else if (checker > TotalSeats) {
                     Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
                 } else {
                     checker++;
