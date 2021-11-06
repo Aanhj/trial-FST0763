@@ -66,16 +66,20 @@ public class BookMovie extends Fragment {
                 if (switcher){
                     switcher=false;
                     recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
+                    GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                }
+                else {
+                    switcher=true;
+
+                    recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
                     LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
                     linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
 
-                }
-                else {
-                    switcher=true;
-                    recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
-                    GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
-                    recyclerView.setLayoutManager(gridLayoutManager);
+
+
+
 
                 }
 
