@@ -2,6 +2,7 @@ package com.example.adapters;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import com.example.trial_fst0763.MovieDetail;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.trial_fst0763.MainActivity.PREFERENCE;
 
 public class Movies_Adapter extends RecyclerView.Adapter<Movies_Adapter.viewHolder> {
 
@@ -53,8 +56,14 @@ public class Movies_Adapter extends RecyclerView.Adapter<Movies_Adapter.viewHold
         holder.Movies_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
+
                 Integer positionID= holder.getAdapterPosition();
+
+                SharedPreferences preferences=context.getSharedPreferences(PREFERENCE,Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor= preferences.edit();
+                editor.putString("position", String.valueOf(positionID));
+                editor.apply();
+                editor.commit();
                 MovieDetail movieDetail=new MovieDetail(positionID);
                 AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
                 appCompatActivity.getSupportFragmentManager().beginTransaction().replace(R.id.movie_frame_layout,movieDetail).commit();

@@ -38,7 +38,7 @@ public class BookMovie extends Fragment {
             R.drawable.m4,
             R.drawable.m5
     );
-    Boolean switcher=true;
+    Boolean switcher=false;
 
 
     @Override
@@ -56,6 +56,9 @@ public class BookMovie extends Fragment {
         View v = inflater.inflate(R.layout.fragment_book_movie, container, false);
         recyclerView=v.findViewById(R.id.movie_recyclerView);
         changeLayout=v.findViewById(R.id.changeLayout);
+
+
+
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
@@ -63,14 +66,14 @@ public class BookMovie extends Fragment {
         changeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (switcher){
-                    switcher=false;
+                if (!switcher){
+                    switcher=true;
                     recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
                     GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
                     recyclerView.setLayoutManager(gridLayoutManager);
                 }
                 else {
-                    switcher=true;
+                    switcher=false;
 
                     recyclerView.setAdapter(new Movies_Adapter(getContext(),MovieTitles,MoviesIcons));
                     LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
