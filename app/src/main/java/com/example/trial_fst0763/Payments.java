@@ -101,8 +101,11 @@ public class Payments extends AppCompatActivity implements PaymentResultListener
 
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     private void startPayment() {
         Checkout checkout = new Checkout();

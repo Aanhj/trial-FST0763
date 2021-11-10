@@ -22,11 +22,11 @@ import com.example.fst_t0763.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SeatBooking extends Fragment {
     int TotalSeats, checker = 1;
-
 
     public SeatBooking(Integer totalSeats) {
         this.TotalSeats = totalSeats;
@@ -36,13 +36,14 @@ public class SeatBooking extends Fragment {
     Button pay;
     boolean SELECTOR = true;
     FrameLayout seat_frame;
-    Integer pos;
+
 
     //String[] selected_seat=new String[TotalSeats];
 //    Integer selected_seat [];
-    ArrayList<Integer> selected_seat = new ArrayList<>();
+    ArrayList<Integer> selected_seat = new ArrayList<>(TotalSeats);
     ArrayList<Integer> validator = new ArrayList<>();
-    ArrayList<Integer> AllSeats = new ArrayList<>();
+    ArrayList<Integer> endseats =
+            new ArrayList<>(Arrays.asList(5, 11, 17, 23, 29, 35, 41, 47, 48, 49));
 
 
     @Override
@@ -57,100 +58,93 @@ public class SeatBooking extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_seat_booking, container, false);
         seatGrid = v.findViewById(R.id.seatGrid);
-        for (int i = 0; i <= 49; i++) {
-            AllSeats.add(i);
-        }
 
 
-        seatGrid.setAdapter(new SeatBooking_Adapter());
+
+        seatGrid.setAdapter(new SeatBooking_Adapter(TotalSeats));
         seat_frame = v.findViewById(R.id.seatBooking_frame);
         pay = v.findViewById(R.id.pay);
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (selected_seat.size() < TotalSeats | selected_seat.size() > TotalSeats ) {
-                    Toast.makeText(getContext(), "Please select appropriate no of seats", Toast.LENGTH_SHORT).show();
+                if (selected_seat.size() < TotalSeats | selected_seat.size() > TotalSeats) {
+                    Toast.makeText(getContext(), "Please select proper number of  seats", Toast.LENGTH_SHORT).show();
 
-                } else if (selected_seat.contains(pos) != seatGrid.getChildAt(pos).isEnabled()) {
-                    seatGrid.getChildAt(pos).setClickable(false);
                 } else {
-
 
                     for (int i = 0; i < selected_seat.size(); i++) {
                         validator.add(selected_seat.get(i));
                     }
-                    //Toast.makeText(getContext(), validator.toString(), Toast.LENGTH_SHORT).show();
-
-/*
-                    seat_frame.removeAllViews();
-                    *//*Integer tickets=TotalSeats;*//*
-
-                    //AppCompatActivity appCompatActivity= (AppCompatActivity) v.getContext();
                     Intent intent = new Intent(getContext(), Payments.class);
                     Bundle args = new Bundle();
                     args.putSerializable("ARRAYLIST", (Serializable) validator);
                     intent.putExtra("TicketData", args);
-                    startActivity(intent);*/
+                    startActivity(intent);
+                    //Toast.makeText(getContext(), validator.toString(), Toast.LENGTH_SHORT).show();
 
 
                 }
             }
         });
-
-
-/*
-        if (selected_seat.contains(pos) != seatGrid.getChildAt(pos).isEnabled()) {
-            seatGrid.getChildAt(pos).setClickable(false);
-        }
-        */
-
-
-
 
         seatGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ImageView img = view.findViewById(R.id.one_seat);
-
+/*
                 if (selected_seat.contains(position)) {
                     checker--;
+                    Toast.makeText(getContext(), " Select more ", Toast.LENGTH_SHORT).show();
                     img.setImageResource(R.drawable.before_booking);
                     selected_seat.remove(selected_seat.indexOf(position));
-                } else if (checker == TotalSeats/*|checker>TotalSeats*/) {
-                    selected_seat.add(position);
-                    img.setImageResource(R.drawable.after_booking);
-
-
-                    /*if (selected_seat.contains(position) != seatGrid.getChildAt(position).isEnabled()) {
-                        seatGrid.getChildAt(position).setClickable(false);
-                    }*/
-
-                    Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
                 } else {
-                    checker++;
-                    selected_seat.add(position);
-                    img.setImageResource(R.drawable.after_booking);
-                    Toast.makeText(getContext(), " Select more ", Toast.LENGTH_SHORT).show();
+                    if (checker - 1 == TotalSeats) {
+                        Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        checker++;
+                        selected_seat.add(position);
+                        img.setImageResource(R.drawable.after_booking);
+                    }
 
+                }*/  //don't delete //working code
+
+                if (checker < TotalSeats) {
+
+                    if (endseats.contains(position)) {
+                        img.setImageResource(R.drawable.after_booking);
+                        for (int i = 0; i < TotalSeats; i++) {
+
+                            img.setImageResource(R.drawable.after_booking);
+
+                            selected_seat.add(position);
+                            position--;
+
+                            checker++;
+                        }
+
+
+                        Toast.makeText(getContext(), "selected seats are  " + selected_seat, Toast.LENGTH_LONG).show();
+                    } else {
+
+                        for (int i = 0; i < TotalSeats; i++) {
+
+                            selected_seat.add(position);
+                            position++;
+                            checker++;
+                        }
+                        Toast.makeText(getContext(), "selected seats are  " + selected_seat, Toast.LENGTH_LONG).show();
+                    }
+
+                } else {
+                    Toast.makeText(getContext(), "Booking Completed", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
-
-
         });
 
 
         return v;
     }
-
-    private boolean seatAreLess(int totalSeats) {
-
-        return true;
-    }
-
-
 }
-
-

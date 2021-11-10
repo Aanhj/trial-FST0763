@@ -17,6 +17,12 @@ import com.example.fst_t0763.R;
 import java.util.ArrayList;
 
 public class SeatBooking_Adapter extends BaseAdapter {
+    Integer seat;
+    Integer pos;
+
+    public SeatBooking_Adapter(Integer seat) {
+        this.seat = seat;
+    }
 
     @Override
     public int getCount() {
