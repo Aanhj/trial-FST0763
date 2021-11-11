@@ -1,18 +1,22 @@
 package com.example.trial_fst0763;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,13 +44,12 @@ public class OtpReaderGenerator extends Fragment {
     SmsBroadCastReceiver smsBroadCastReceiver;
 
 
-
     TextInputEditText otpTextBox;
     Button generate_otp, verify_otp;
-    String  newgeneratedOTP,generatedOtp,message,lastOTP;
+    String newgeneratedOTP, generatedOtp, message, lastOTP;
     Random random = new Random();
-    public static int OTP_COUNTER=0;
-    public static int OTP_LIMIT=11;
+    public static int OTP_COUNTER = 0;
+    public static int OTP_LIMIT = 11;
 
     @Override
 
@@ -63,7 +66,22 @@ public class OtpReaderGenerator extends Fragment {
         otpTextBox = v.findViewById(R.id.txtBoxOtpReader);
         generate_otp = v.findViewById(R.id.generate_otp);
         verify_otp = v.findViewById(R.id.verify_otp);
-      /*  smartUserConsent();*/
+        TelephonyManager telephonyManager = (TelephonyManager) getContext().getSystemService(getContext().TELEPHONY_SERVICE);
+
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+        }
+        String phone = telephonyManager.getLine1Number();
+        Toast.makeText(getContext(), "Phone number is "+phone, Toast.LENGTH_SHORT).show();
+        smartUserConsent();
 
 
         generate_otp.setOnClickListener(new View.OnClickListener() {

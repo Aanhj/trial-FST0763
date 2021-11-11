@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
