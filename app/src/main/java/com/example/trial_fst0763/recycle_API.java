@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.APIClient_Classes.APIClient;
+import com.example.Interface.API_Interface;
+import com.example.ModelClasses.DataModel;
 import com.example.adapters.rcl_view_holder;
 import com.example.fst_t0763.R;
 
@@ -27,6 +31,7 @@ import retrofit2.Response;
 
 public class recycle_API extends Fragment {
     RecyclerView rclView;
+    SwipeRefreshLayout swipeRefreshLayout;
     //    Retrofit retrofit;
 //    ArrayList<DataModel> dataModel;
 //    rcl_view_holder viewpopulated;
@@ -52,6 +57,7 @@ public class recycle_API extends Fragment {
         rcl_rate_table = v.findViewById(R.id.rcl_rate_table);
         rcl_testtype_table = v.findViewById(R.id.rcl_testtype_table);
         rclView = v.findViewById(R.id.rcl_view);
+        swipeRefreshLayout=v.findViewById(R.id.swipeLayout_recycle_api);
         setRetainInstance(true);
         LinearLayoutManager manager = new LinearLayoutManager(v.getContext());
         rclView.setLayoutManager(manager);
@@ -61,13 +67,21 @@ public class recycle_API extends Fragment {
         callAPI();
         initListerner();
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callAPI();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         return v;
     }
 
 
     private void callAPI() {
         progressBar = new ProgressDialog(getActivity());
-        progressBar.setTitle("Please Wait..");
+        progressBar.setTitle("Please Wait...");
         progressBar.show();
 
         //api calling

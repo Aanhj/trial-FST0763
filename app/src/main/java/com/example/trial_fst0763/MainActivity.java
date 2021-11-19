@@ -1,5 +1,6 @@
 package com.example.trial_fst0763;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fst_t0763.R;
@@ -61,18 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     if (checkuser) {
 
 
-                        Intent intent = new Intent(MainActivity.this, homePage.class);
-                        intent.putExtra("phone", strphone);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(MainActivity.this, "No user found, Please Register", Toast.LENGTH_SHORT).show();
-                    }
-
-                    if (remember.isChecked()) {
-
-
-                        if (checkuser) {
+                        if (remember.isChecked()) {
                             SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
                             SharedPreferences.Editor ed = sharedPreferences.edit();
                             ed.putString("phone", strphone);
@@ -82,11 +73,41 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, homePage.class);
                             intent.putExtra("phone", strphone);
                             startActivity(intent);
+
                         }
-                        else {
-                            Toast.makeText(MainActivity.this, "Invalid User Credentials", Toast.LENGTH_SHORT).show();
+                        else{
+                            AlertDialog.Builder alertDialogg = new AlertDialog.Builder(MainActivity.this);
+                            alertDialogg.setTitle("Confirmation");
+                            alertDialogg.setMessage("Your credentials will not be remembered, Is it ok?");
+                            alertDialogg.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(MainActivity.this, homePage.class);
+                                    intent.putExtra("phone", strphone);
+                                    dialog.dismiss();
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                            alertDialogg.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+
+                                    dialog.dismiss();
+
+                                }
+                            });
+                            alertDialogg.create();
+                            alertDialogg.show();
+
+
                         }
+
+                    } else {
+                        Toast.makeText(MainActivity.this, "No user found, Please Register", Toast.LENGTH_SHORT).show();
                     }
+
 
                 } else {
                     Toast.makeText(MainActivity.this, "Invalid User Credentials", Toast.LENGTH_SHORT).show();

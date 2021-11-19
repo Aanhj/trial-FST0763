@@ -38,6 +38,11 @@
         android:icon="@drawable/book_movie"
         android:title="Book Movie" />
 
+    <item
+        android:id="@+id/encrypt"
+        android:enabled="true"
+        android:icon="@drawable/encryption_icon"
+        android:title="String Encryption" />
 </group>
 
 

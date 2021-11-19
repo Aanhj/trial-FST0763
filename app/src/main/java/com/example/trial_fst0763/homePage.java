@@ -5,8 +5,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -48,7 +49,6 @@ public class homePage extends AppCompatActivity {
         convertToByte ctb = new convertToByte();
         dbHelper = new DBHelper(this);
         View header = navigationView.getHeaderView(0);
-
 
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
@@ -119,31 +119,58 @@ public class homePage extends AppCompatActivity {
                         drawer.closeDrawers();
                         break;
                     case R.id.otp_menu:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout,new OtpReaderGenerator()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout, new OtpReaderGenerator()).commit();
                         drawer.closeDrawers();
                         break;
 
                     case R.id.book_menu:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout,new BookMovie()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout, new BookMovie()).commit();
+                        drawer.closeDrawers();
+                        break;
+                    case R.id.encrypt:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout, new Base()).commit();
                         drawer.closeDrawers();
                         break;
 
 
                     case R.id.signout:
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
-                        SharedPreferences.Editor ed = sharedPreferences.edit();
-                        String phone = sharedPreferences.getString("phone", null);
-                        if (phone != null) {
-                            ed.remove("phone");
-                            ed.apply();
-                            ed.commit();
-                            startActivity(new Intent(homePage.this, MainActivity.class));
-                            finish();
-                        } else {
-                            startActivity(new Intent(homePage.this, MainActivity.class));
-                        }
+                        drawer.closeDrawers();
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(homePage.this);
+                        alertDialog.setTitle("Logout");
+                        alertDialog.setMessage("Confirm to logout");
 
+                        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                SharedPreferences sharedPreferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
+                                SharedPreferences.Editor ed = sharedPreferences.edit();
+                                String phone = sharedPreferences.getString("phone", null);
+                                if (phone != null) {
+                                    ed.remove("phone");
+                                    ed.apply();
+                                    ed.commit();
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    dialog.dismiss();
+                                    finish();
+                                } else {
+                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    dialog.dismiss();
+                                }
+
+
+                            }
+                        });
+
+                        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialog.create();
+                        alertDialog.show();
 
                         break;
 

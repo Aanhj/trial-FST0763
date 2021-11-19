@@ -27,6 +27,12 @@ import com.example.fst_t0763.R;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.material.textfield.TextInputEditText;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.net.PasswordAuthentication;
 import java.util.Random;
@@ -50,6 +56,7 @@ public class OtpReaderGenerator extends Fragment {
     Random random = new Random();
     public static int OTP_COUNTER = 0;
     public static int OTP_LIMIT = 11;
+    Dexter dexter;
 
     @Override
 

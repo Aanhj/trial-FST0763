@@ -12,27 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fst_t0763.R;
-import com.example.trial_fst0763.DataModel;
+import com.example.ModelClasses.DataModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class rcl_view_holder extends RecyclerView.Adapter<rcl_view_holder.viewholder> {
-    //ArrayList<DataModel.TestMaster> testMasArraylist;
-    //ArrayList<DataModel.SampleType> sampletypeArrayList;
+
     String sample = " ";
 
     List<DataModel.TestMaster> testMasArraylist;
 
-    //    ArrayList<DataModel.SampleType> sampletypeArrayList;
-    /* DataModel.TestMaster test;
-     DataModel.SampleType sample;*/
     Context context;
 
     public rcl_view_holder(List<DataModel.TestMaster> testMaster, Context context) {
         this.testMasArraylist = testMaster;
-//        this.sampletypeArrayList = sampleType;
+
         this.context = context;
     }
 
@@ -46,16 +42,12 @@ public class rcl_view_holder extends RecyclerView.Adapter<rcl_view_holder.viewho
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        //  DataModel.TestMaster testMaster = testMasArraylist.get(position);
         DataModel.TestMaster tstratemasterDTO = testMasArraylist.get(position);
-
-
-//        Toast.makeText(context, Test, Toast.LENGTH_SHORT).show();
         holder.fasting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int a = tstratemasterDTO.getSampltype().size();
+
                 String[] arr_size = new String[tstratemasterDTO.getSampltype().size()];
 
                 for (int i = 0; i < arr_size.length; i++) {
@@ -97,17 +89,6 @@ public class rcl_view_holder extends RecyclerView.Adapter<rcl_view_holder.viewho
 
         holder.str_rate = tstratemasterDTO.getRate();
         holder.rate.setText(tstratemasterDTO.getRate());
-
-
-        /*holder.rate_table.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context," clicked",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-*/
-
 
     }
 

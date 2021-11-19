@@ -1,4 +1,4 @@
-package com.example.trial_fst0763;
+package com.example.ModelClasses;
 
 import android.text.TextUtils;
 

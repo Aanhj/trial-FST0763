@@ -93,22 +93,6 @@ public class SeatBooking extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ImageView img = view.findViewById(R.id.one_seat);
 /*
-                if (selected_seat.contains(position)) {
-                    checker--;
-                    Toast.makeText(getContext(), " Select more ", Toast.LENGTH_SHORT).show();
-                    img.setImageResource(R.drawable.before_booking);
-                    selected_seat.remove(selected_seat.indexOf(position));
-                } else {
-                    if (checker - 1 == TotalSeats) {
-                        Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
-                    } else {
-                        checker++;
-                        selected_seat.add(position);
-                        img.setImageResource(R.drawable.after_booking);
-                    }
-
-                }*/  //don't delete //working code
-
                 if (checker < TotalSeats) {
 
                     if (endseats.contains(position)) {
@@ -138,8 +122,24 @@ public class SeatBooking extends Fragment {
 
                 } else {
                     Toast.makeText(getContext(), "Booking Completed", Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
+                if (selected_seat.contains(position)) {
+                    checker--;
+                    Toast.makeText(getContext(), " Select more ", Toast.LENGTH_SHORT).show();
+                    img.setImageResource(R.drawable.before_booking);
+                    selected_seat.remove(selected_seat.indexOf(position));
+                } else {
+                    if (checker - 1 == TotalSeats) {
+                        Toast.makeText(getContext(), "Completed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        checker++;
+                        selected_seat.add(position);
+                        img.setImageResource(R.drawable.after_booking);
+                    }
+
+                }
+                //don't delete //working code
 
             }
         });
