@@ -19,6 +19,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fst_t0763.AuthApiCall;
 import com.example.fst_t0763.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -130,6 +131,10 @@ public class homePage extends AppCompatActivity {
                     case R.id.encrypt:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frm_layout, new Base()).commit();
                         drawer.closeDrawers();
+                        break;
+
+                    case R.id.postAuthApi:
+                       startActivity(new Intent(homePage.this, AuthApiCall.class));
                         break;
 
 

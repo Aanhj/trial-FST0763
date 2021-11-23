@@ -24,13 +24,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/app_icon"
@@ -39,8 +37,10 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FST_T0763">
-        <activity android:name="com.example.trial_fst0763.Payments"></activity>
+        android:theme="@style/Theme.FST_T0763"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".AuthApiCall"></activity>
+        <activity android:name="com.example.trial_fst0763.Payments" />
         <!--
           <service android:name="com.example.trial_fst0763.SmsBroadCastReceiver"
             android:label="notification"
@@ -65,7 +65,7 @@
             android:value="@string/google_maps_api" />
 
         <activity android:name="com.example.trial_fst0763.scan_handler" />
-        <activity android:name="com.example.trial_fst0763.splash"></activity>
+        <activity android:name="com.example.trial_fst0763.splash" />
         <activity android:name="com.example.trial_fst0763.homePage" />
         <activity android:name="com.example.trial_fst0763.registerUser" />
         <activity android:name="com.example.trial_fst0763.MainActivity" />

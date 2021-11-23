@@ -42,7 +42,15 @@
         android:id="@+id/encrypt"
         android:enabled="true"
         android:icon="@drawable/encryption_icon"
-        android:title="String Encryption" />
+        android:title="Post API" />
+
+    <item
+        android:id="@+id/postAuthApi"
+        android:enabled="true"
+        android:icon="@drawable/encryption_icon"
+        android:title="Post Auth Header API" />
+
+
 </group>
 
 

@@ -53,11 +53,12 @@ public class PostAPI extends Fragment {
         });
         return v;
     }
+
     private void sendPostRequest() {
         API_Interface api_interface = (API_Interface) PostAPIClient.getRetrofitInstance()
                 .postClient("http://stagingapi.charbi.com/ThyrostaffWeb/").create(API_Interface.class);
 
-        requsetDataModel=new Requset_Data_Model();
+        requsetDataModel = new Requset_Data_Model();
         requsetDataModel.setECODE("1343E");
         requsetDataModel.setALL_LEAVES(set_leavedetails());
 
@@ -68,7 +69,7 @@ public class PostAPI extends Fragment {
             public void onResponse(Call<Response_Data_Model> call, Response<Response_Data_Model> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     response_data_model = response.body();
-                    Toast.makeText(getContext(), "Response:"+response_data_model.getResponse()+"\n"+ "Response ID:"+response_data_model.getResponse_Id(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Response:" + response_data_model.getResponse() + "\n" + "Response ID:" + response_data_model.getResponse_Id(), Toast.LENGTH_SHORT).show();
 
                 } else {
                     Toast.makeText(getContext(), "no response", Toast.LENGTH_SHORT).show();
@@ -87,8 +88,10 @@ public class PostAPI extends Fragment {
     }
 
     private List<Requset_Data_Model.ALLLEAVESDTO> set_leavedetails() {
-        List<Requset_Data_Model.ALLLEAVESDTO> leaves_list=new ArrayList<>();
-        Requset_Data_Model.ALLLEAVESDTO request_leaves=new Requset_Data_Model.ALLLEAVESDTO();
+        List<Requset_Data_Model.ALLLEAVESDTO> leaves_list = new ArrayList<>();
+        Requset_Data_Model.ALLLEAVESDTO request_leaves = new Requset_Data_Model.ALLLEAVESDTO();
+
+
         request_leaves.setLEAVE_ID("L174201");
         request_leaves.setACTION("Reject");
 

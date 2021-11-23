@@ -216,23 +216,7 @@ public class registerUser extends AppCompatActivity {
         });
         builder.show();
     }
-/*
-    private File createImageFile() {
-        timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        imageFilename = "test_" + timestamp;
-        File StorageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
-        try {
-            file = File.createTempFile(
-                    imageFilename, ".png", StorageDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        photoPath = "content://" + file.getAbsolutePath();
-        return file;
-
-    }*/
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
