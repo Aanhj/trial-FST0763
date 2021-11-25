@@ -25,7 +25,7 @@ public interface API_Interface {
 
     @Multipart
     @POST("OrderAllocation/SelfiafterWOE")
-    Call<AuthApiResponseModel> sendAuthHeader(@Part("Btechid") RequestBody Btechid,
+    Call<String> sendAuthHeader(@Part("Btechid") RequestBody Btechid,
                                               @Part ("ORDERNO") RequestBody ORDERNO,
                                               @Part MultipartBody.Part Image);
 }

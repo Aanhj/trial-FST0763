@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -50,6 +51,8 @@ public class AuthApiCall extends AppCompatActivity {
     Uri picked_image;
     String trial;
     File file;
+    String btechid, oRDERNO;
+    ProgressDialog progressBar;
 
 
     @Override
@@ -65,6 +68,7 @@ public class AuthApiCall extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 picktheImage();
+
             }
         });
 
@@ -157,8 +161,15 @@ public class AuthApiCall extends AppCompatActivity {
 
 
     private void sendRequest() {
-        RequestBody Btechid = RequestBody.create(MediaType.parse("multipart/form-data"), "884543153");
-        RequestBody ORDERNO = RequestBody.create(MediaType.parse("multipart/form-data"), "vl2a7eaa");
+        progressBar = new ProgressDialog(AuthApiCall.this);
+        progressBar.setTitle("Please Wait...");
+        progressBar.show();
+
+        btechid = "884543153";
+        oRDERNO = "vl2a7eaa";
+
+        RequestBody Btechid = RequestBody.create(MediaType.parse("multipart/form-data"), btechid);
+        RequestBody ORDERNO = RequestBody.create(MediaType.parse("multipart/form-data"), oRDERNO);
         MultipartBody.Part Image = null;
         if (file != null && file.exists()) {
             RequestBody f1 = RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -168,32 +179,32 @@ public class AuthApiCall extends AppCompatActivity {
         try {
 
 
-            API_Interface api_interface = AuthHeaderClient.getAuthHeaderClient().AuthheaderClient("http://techsostng.thyrocare.cloud/techsoapi/api/").create(API_Interface.class);
-            Call<AuthApiResponseModel> authApiResponseModelCall = api_interface.sendAuthHeader(Btechid, ORDERNO, Image);
-            authApiResponseModelCall.enqueue(new Callback<AuthApiResponseModel>() {
+            API_Interface api_interface = AuthHeaderClient.getAuthHeaderClient().AuthheaderClient("http://techsostng.thyrocare.cloud/techsoapi/api/")
+                    .create(API_Interface.class);
+            Call<String> authApiResponseModelCall = api_interface.sendAuthHeader(Btechid, ORDERNO, Image);
+            authApiResponseModelCall.enqueue(new Callback<String>() {
                 @Override
-                public void onResponse(Call<AuthApiResponseModel> call, Response<AuthApiResponseModel> response) {
+                public void onResponse(Call<String> call, Response<String> response) {
+                    progressBar.dismiss();
                     if (response.isSuccessful() && response.body() != null) {
-                        AuthApiResponseModel apiResponseModel=response.body();
-                        String testAuthApi=apiResponseModel.getResponse();
-                        Toast.makeText(AuthApiCall.this, "Response:= "+testAuthApi, Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(AuthApiCall.this, "response: null", Toast.LENGTH_LONG).show();
+                        String test = response.body();
+                        Toast.makeText(AuthApiCall.this, "response message:" + test, Toast.LENGTH_SHORT).show();
                     }
+
                 }
 
                 @Override
-                public void onFailure(Call<AuthApiResponseModel> call, Throwable t) {
-                    Toast.makeText(AuthApiCall.this, "failed:" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                public void onFailure(Call<String> call, Throwable t) {
+                    progressBar.dismiss();
+                    Toast.makeText(AuthApiCall.this, "Response failed to retrieve", Toast.LENGTH_SHORT).show();
+
                 }
             });
 
 
         } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
+            progressBar.dismiss();
+            Log.i("exception", e.getLocalizedMessage());
         }
-
-
     }
-
 }
